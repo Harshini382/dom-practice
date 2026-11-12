@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accordion</title>
+
+    <style>
+        .content {
+            display: none;
+        }
+
+        .heading {
+            background-color: lightgray;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .content.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="heading">What is HTML?</h2>
+    <p class="content">HTML stands for HyperText Markup Language.</p>
+
+    <h2 class="heading">What is CSS?</h2>
+    <p class="content">CSS is used to style web pages.</p>
+
+    <h2 class="heading">What is JavaScript?</h2>
+    <p class="content">JavaScript makes web pages interactive.</p>
+
+    <script>
+        let headings = document.querySelectorAll(".heading");
+
+        headings.forEach(function(heading) {
+
+            heading.addEventListener("click", function() {
+
+                let paragraph = heading.nextElementSibling;
+
+                paragraph.classList.toggle("show");
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

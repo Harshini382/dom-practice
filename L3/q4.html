@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabs</title>
+    <style>
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        .tab.active {
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Tabs</h1>
+
+    <div id="tabs">
+        <button class="tab active" data-tab="one">HTML</button>
+        <button class="tab" data-tab="two">CSS</button>
+        <button class="tab" data-tab="three">JavaScript</button>
+    </div>
+
+    <div id="panels">
+        <div class="panel active" id="one">
+            <h2>HTML</h2>
+            <p>HTML creates the structure of a webpage.</p>
+        </div>
+
+        <div class="panel" id="two">
+            <h2>CSS</h2>
+            <p>CSS styles the webpage.</p>
+        </div>
+
+        <div class="panel" id="three">
+            <h2>JavaScript</h2>
+            <p>JavaScript adds functionality.</p>
+        </div>
+    </div>
+
+    <script>
+        let tabs = document.getElementById("tabs");
+
+        let buttons = document.querySelectorAll(".tab");
+        let panels = document.querySelectorAll(".panel");
+
+        tabs.addEventListener("click", function(event) {
+
+            if (!event.target.matches(".tab")) {
+                return;
+            }
+
+            let selected = event.target.dataset.tab;
+
+            buttons.forEach(function(button) {
+                button.classList.remove("active");
+            });
+
+            panels.forEach(function(panel) {
+                panel.classList.remove("active");
+            });
+
+            event.target.classList.add("active");
+
+            document.getElementById(selected).classList.add("active");
+
+        });
+    </script>
+
+</body>
+</html>

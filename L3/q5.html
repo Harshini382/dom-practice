@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App</title>
+</head>
+<body>
+
+    <h1>JavaScript Quiz</h1>
+
+    <h3 id="question"></h3>
+
+    <div id="options"></div>
+
+    <p id="score"></p>
+    <p id="bestScore"></p>
+
+    <button id="nextBtn" disabled>Next Question</button>
+
+    <script>
+        let questions = [
+            {
+                question: "What does HTML stand for?",
+                options: [
+                    "Hyper Text Markup Language",
+                    "High Text Machine Language",
+                    "Home Tool Markup Language"
+                ],
+                answer: 0
+            },
+            {
+                question: "Which language styles a webpage?",
+                options: ["HTML", "CSS", "JavaScript"],
+                answer: 1
+            },
+            {
+                question: "Which method selects an element by ID?",
+                options: [
+                    "querySelectorAll()",
+                    "getElementById()",
+                    "getElementsByClassName()"
+                ],
+                answer: 1
+            }
+        ];
+
+        let current = 0;
+        let points = 0;
+        let selected = false;
+
+        let question = document.getElementById("question");
+        let options = document.getElementById("options");
+        let nextBtn = document.getElementById("nextBtn");
+
+        let best = Number(localStorage.getItem("bestScore")) || 0;
+
+        document.getElementById("bestScore").textContent =
+            "Best Score: " + best;
+
+        function showQuestion() {
+            selected = false;
+            nextBtn.disabled = true;
+
+            let q = questions[current];
+
+            question.textContent = q.question;
+            options.innerHTML = "";
+
+            q.options.forEach(function(option, index) {
+                let button = document.createElement("button");
+
+                button.textContent = option;
+
+                button.addEventListener("click", function() {
+                    if (selected) return;
+
+                    selected = true;
+
+                    if (index === q.answer) {
+                        points++;
+                        button.style.backgroundColor = "lightgreen";
+                    } else {
+                        button.style.backgroundColor = "lightcoral";
+                        options.children[q.answer].style.backgroundColor = "lightgreen";
+                    }
+
+                    nextBtn.disabled = false;
+                });
+
+                options.append(button);
+            });
+
+            document.getElementById("score").textContent =
+                "Score: " + points;
+        }
+
+        nextBtn.addEventListener("click", function() {
+            current++;
+
+            if (current < questions.length) {
+                showQuestion();
+            } else {
+                question.textContent = "Quiz Completed!";
+                options.innerHTML = "";
+
+                if (points > best) {
+                    best = points;
+                    localStorage.setItem("bestScore", best);
+                }
+
+                document.getElementById("score").textContent =
+                    "Your Final Score: " + points + "/" + questions.length;
+
+                document.getElementById("bestScore").textContent =
+                    "Best Score: " + best;
+
+                nextBtn.disabled = true;
+                nextBtn.textContent = "Completed";
+            }
+        });
+
+        showQuestion();
+    </script>
+
+</body>
+</html>

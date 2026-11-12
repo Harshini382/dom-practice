@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 7</title>
+</head>
+<body>
+
+    <input type="text" id="userInput" placeholder="Type something">
+
+    <p id="output">Your text will appear here.</p>
+
+    <script>
+        let input = document.getElementById("userInput");
+        let output = document.getElementById("output");
+
+        input.addEventListener("input", function() {
+            output.textContent = input.value;
+        });
+    </script>
+
+</body>
+</html>

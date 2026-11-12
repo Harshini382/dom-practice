@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do App</title>
+    <style>
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My To-Do List</h1>
+
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addBtn">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        let input = document.getElementById("taskInput");
+        let addBtn = document.getElementById("addBtn");
+        let taskList = document.getElementById("taskList");
+
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        function saveTasks() {
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        function displayTasks() {
+            taskList.innerHTML = "";
+
+            tasks.forEach(function(task, index) {
+                let li = document.createElement("li");
+
+                let span = document.createElement("span");
+                span.textContent = task.name;
+
+                if (task.done) {
+                    span.classList.add("done");
+                }
+
+                let doneBtn = document.createElement("button");
+                doneBtn.textContent = "Done";
+
+                doneBtn.addEventListener("click", function() {
+                    tasks[index].done = !tasks[index].done;
+                    saveTasks();
+                    displayTasks();
+                });
+
+                let deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Delete";
+
+                deleteBtn.addEventListener("click", function() {
+                    tasks.splice(index, 1);
+                    saveTasks();
+                    displayTasks();
+                });
+
+                li.append(span, doneBtn, deleteBtn);
+                taskList.append(li);
+            });
+        }
+
+        addBtn.addEventListener("click", function() {
+            let value = input.value.trim();
+
+            if (value !== "") {
+                tasks.push({
+                    name: value,
+                    done: false
+                });
+
+                saveTasks();
+                displayTasks();
+                input.value = "";
+            }
+        });
+
+        displayTasks();
+    </script>
+
+</body>
+</html>

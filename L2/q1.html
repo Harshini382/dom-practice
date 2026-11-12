@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter</title>
+</head>
+<body>
+
+    <h1 id="count">0</h1>
+
+    <button id="plus">+</button>
+    <button id="minus">-</button>
+    <button id="reset">Reset</button>
+
+    <script>
+        let count = 0;
+
+        let number = document.getElementById("count");
+
+        document.getElementById("plus").addEventListener("click", function() {
+            count++;
+            updateCount();
+        });
+
+        document.getElementById("minus").addEventListener("click", function() {
+            count--;
+            updateCount();
+        });
+
+        document.getElementById("reset").addEventListener("click", function() {
+            count = 0;
+            updateCount();
+        });
+
+        function updateCount() {
+            number.textContent = count;
+
+            if (count < 0) {
+                number.style.color = "red";
+            } else {
+                number.style.color = "black";
+            }
+        }
+    </script>
+
+</body>
+</html>
