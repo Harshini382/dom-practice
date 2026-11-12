@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Storage</title>
+</head>
+<body>
+
+    <h2 id="greeting"></h2>
+
+    <input type="text" id="username" placeholder="Enter your name">
+
+    <button id="saveBtn">Save Name</button>
+
+    <script>
+        let greeting = document.getElementById("greeting");
+
+        let username = document.getElementById("username");
+
+        let button = document.getElementById("saveBtn");
+
+        let savedName = localStorage.getItem("username");
+
+        if (savedName) {
+            greeting.textContent = "Welcome back, " + savedName + "!";
+        } else {
+            greeting.textContent = "Welcome! Enter your name.";
+        }
+
+        button.addEventListener("click", function() {
+
+            let name = username.value.trim();
+
+            if (name !== "") {
+
+                localStorage.setItem("username", name);
+
+                greeting.textContent = "Welcome, " + name + "!";
+
+                username.value = "";
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+
+    <form id="myForm">
+
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <br><br>
+
+        <input type="number" id="age" placeholder="Enter your age" required>
+
+        <br><br>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        let form = document.getElementById("myForm");
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let age = Number(document.getElementById("age").value);
+
+            let message = document.getElementById("message");
+
+            if (age < 18) {
+                message.textContent = "Error: You must be 18 or older.";
+                message.style.color = "red";
+            } else {
+                message.textContent = "Hello " + name + "! Welcome.";
+                message.style.color = "green";
+            }
+
+        });
+    </script>
+
+</body>
+</html>
