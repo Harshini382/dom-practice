@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live City Search</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #search {
+            display: block;
+            width: 80%;
+            max-width: 400px;
+            padding: 12px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #cityList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 0;
+        }
+
+        .card {
+            background: white;
+            width: 200px;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            color: #333;
+        }
+
+        #noResult {
+            text-align: center;
+            color: red;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🌆 Search Cities</h1>
+
+    <input type="text" id="search"
+           placeholder="Search a city...">
+
+    <div id="cityList"></div>
+
+    <script>
+
+        let cities = [
+            {
+                name: "Chennai",
+                image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400"
+            },
+            {
+                name: "Bangalore",
+                image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=400"
+            },
+            {
+                name: "Mumbai",
+                image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400"
+            },
+            {
+                name: "Delhi",
+                image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=400"
+            },
+            {
+                name: "Hyderabad",
+                image: "https://commons.wikimedia.org/wiki/Special:FilePath/Charminar%20at%20Hyderabad%20Telangana%20India.jpg?width=600"
+            },
+            {
+                name: "Kolkata",
+                image: "https://images.unsplash.com/photo-1558431382-27e303142255?w=400"
+            },
+            {
+                name: "Pune",
+                image: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=400"
+            },
+            {
+                name: "Coimbatore",
+                image: "https://commons.wikimedia.org/wiki/Special:FilePath/Coimbatore.jpg?width=600"
+            },
+            {
+                name: "Jaipur",
+                image: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?w=400"
+            }
+        ];
+
+        let search = document.getElementById("search");
+
+        let cityList = document.getElementById("cityList");
+
+
+        // Display cities
+
+        function displayCities(cityArray) {
+
+            cityList.innerHTML = "";
+
+            if (cityArray.length === 0) {
+
+                cityList.innerHTML =
+                    "<h3 id='noResult'>No cities found!</h3>";
+
+                return;
+            }
+
+            cityArray.forEach(function(city) {
+
+                let div = document.createElement("div");
+
+                div.classList.add("card");
+
+                let img = document.createElement("img");
+
+                img.src = city.image;
+                img.alt = city.name;
+
+                let name = document.createElement("h3");
+
+                name.textContent = city.name;
+
+                div.append(img, name);
+
+                cityList.append(div);
+
+            });
+
+        }
+
+
+        // Live search
+
+        search.addEventListener("input", function() {
+
+            let value = search.value.toLowerCase();
+
+            let filtered = cities.filter(function(city) {
+
+                return city.name.toLowerCase().includes(value);
+
+            });
+
+            displayCities(filtered);
+
+        });
+
+
+        // Display all cities initially
+
+        displayCities(cities);
+
+    </script>
+
+</body>
+</html>

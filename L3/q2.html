@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+
+    <h1>Register</h1>
+
+    <form id="registerForm">
+
+        <input type="text" id="name" placeholder="Name">
+        <p id="nameError"></p>
+
+        <input type="email" id="email" placeholder="Email">
+        <p id="emailError"></p>
+
+        <input type="tel" id="phone" placeholder="Phone">
+        <p id="phoneError"></p>
+
+        <input type="password" id="password" placeholder="Password">
+        <p id="passwordError"></p>
+        <p id="strength"></p>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        let nameInput = document.getElementById("name");
+        let emailInput = document.getElementById("email");
+        let phoneInput = document.getElementById("phone");
+        let passwordInput = document.getElementById("password");
+
+        function validateName() {
+            let valid = nameInput.value.trim().length >= 3;
+
+            document.getElementById("nameError").textContent =
+                valid ? "" : "Name must have at least 3 characters.";
+
+            return valid;
+        }
+
+        function validateEmail() {
+            let valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+
+            document.getElementById("emailError").textContent =
+                valid ? "" : "Enter a valid email.";
+
+            return valid;
+        }
+
+        function validatePhone() {
+            let valid = /^\d{10}$/.test(phoneInput.value);
+
+            document.getElementById("phoneError").textContent =
+                valid ? "" : "Enter exactly 10 digits.";
+
+            return valid;
+        }
+
+        function validatePassword() {
+            let password = passwordInput.value;
+
+            let strong =
+                /[A-Z]/.test(password) &&
+                /[a-z]/.test(password) &&
+                /\d/.test(password) &&
+                /[^A-Za-z0-9]/.test(password) &&
+                password.length >= 8;
+
+            let strength = document.getElementById("strength");
+
+            if (password.length === 0) {
+                strength.textContent = "";
+            } else if (strong) {
+                strength.textContent = "Strong password";
+                strength.style.color = "green";
+            } else if (password.length >= 6) {
+                strength.textContent = "Medium password";
+                strength.style.color = "orange";
+            } else {
+                strength.textContent = "Weak password";
+                strength.style.color = "red";
+            }
+
+            document.getElementById("passwordError").textContent =
+                password.length === 0 ? "Password is required." :
+                strong ? "" : "Use 8 characters with uppercase, lowercase, number and symbol.";
+
+            return strong;
+        }
+
+        nameInput.addEventListener("input", validateName);
+        emailInput.addEventListener("input", validateEmail);
+        phoneInput.addEventListener("input", validatePhone);
+        passwordInput.addEventListener("input", validatePassword);
+
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let valid =
+                validateName() &&
+                validateEmail() &&
+                validatePhone() &&
+                validatePassword();
+
+            let result = document.getElementById("result");
+
+            if (valid) {
+                result.textContent = "Registration successful!";
+                result.style.color = "green";
+            } else {
+                result.textContent = "Please correct the errors.";
+                result.style.color = "red";
+            }
+        });
+    </script>
+
+</body>
+</html>
