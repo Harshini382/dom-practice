@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Image Change</title>
+</head>
+<body>
+
+    <h2>Black Aston Martin Valkyrie vs Batmobile</h2>
+
+    <img id="myImage"
+         width="500"
+         alt="Car image"
+         src="https://drivershall.com/wp-content/uploads/2020/03/Drivershall-Q-by-Aston-Martin-Designer-Specification-ULTIMATE-3-1024x576.jpg">
+
+    <br><br>
+
+    <button onclick="showValkyrie()">Aston Martin</button>
+    <button onclick="showBatmobile()">Batmobile</button>
+
+    <p id="status"></p>
+
+    <script>
+
+        const valkyrie = "https://drivershall.com/wp-content/uploads/2020/03/Drivershall-Q-by-Aston-Martin-Designer-Specification-ULTIMATE-3-1024x576.jpg";
+
+        const batmobile = "https://hips.hearstapps.com/hmg-prod/images/batmobile-lead-1646254332.jpg?crop=1.00xw:1.00xh;0,0&resize=1800:*";
+
+        function showValkyrie() {
+            document.getElementById("myImage").src = valkyrie;
+        }
+
+        function showBatmobile() {
+            document.getElementById("myImage").src = batmobile;
+        }
+
+        document.getElementById("myImage").onerror = function() {
+            document.getElementById("status").innerText =
+                "Image failed to load. Check the image URL or website permissions.";
+        };
+
+    </script>
+
+</body>
+</html>

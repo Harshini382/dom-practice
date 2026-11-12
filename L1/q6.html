@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 6</title>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="myParagraph">Hello! I can be hidden and shown.</p>
+
+    <button id="toggleButton">Hide / Show</button>
+
+    <script>
+        let paragraph = document.getElementById("myParagraph");
+        let button = document.getElementById("toggleButton");
+
+        button.addEventListener("click", function() {
+            paragraph.classList.toggle("hidden");
+        });
+    </script>
+
+</body>
+</html>
