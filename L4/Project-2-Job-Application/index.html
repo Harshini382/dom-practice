@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerConnect - Job Application</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CareerConnect</h1>
+      <p>Job Application Form</p>
+    </header>
+
+    <div id="errorSummary" class="errors" hidden>
+      <h3>Please correct the following errors:</h3>
+      <ul id="errorList"></ul>
+    </div>
+
+    <div id="success" class="success" hidden>
+      Application submitted successfully!
+    </div>
+
+    <form id="applicationForm" novalidate>
+      <section>
+        <h2>01. Personal Details</h2>
+        <label>Full Name</label>
+        <input id="name" type="text" placeholder="Enter full name">
+
+        <label>Email Address</label>
+        <input id="email" type="email" placeholder="Enter email">
+
+        <label>Phone Number</label>
+        <input id="phone" type="tel" placeholder="10 digit phone number">
+
+        <label>Address</label>
+        <textarea id="address" placeholder="Your address"></textarea>
+      </section>
+
+      <section>
+        <h2>02. Education Details</h2>
+        <label>Highest Qualification</label>
+        <select id="education">
+          <option value="">Select qualification</option>
+          <option>High School</option>
+          <option>Diploma</option>
+          <option>Bachelor's Degree</option>
+          <option>Master's Degree</option>
+          <option>PhD</option>
+        </select>
+
+        <label>College / University</label>
+        <input id="college" placeholder="Institution name">
+
+        <label>Graduation Year</label>
+        <input id="year" type="number" placeholder="2025">
+      </section>
+
+      <section>
+        <h2>03. Technical Skills</h2>
+        <p>Select your skills:</p>
+
+        <div class="skills">
+          <label><input type="checkbox" name="skills" value="HTML"> HTML</label>
+          <label><input type="checkbox" name="skills" value="CSS"> CSS</label>
+          <label><input type="checkbox" name="skills" value="JavaScript"> JavaScript</label>
+          <label><input type="checkbox" name="skills" value="React"> React</label>
+          <label><input type="checkbox" name="skills" value="Python"> Python</label>
+          <label><input type="checkbox" name="skills" value="SQL"> SQL</label>
+        </div>
+
+        <label>Years of Experience</label>
+        <input id="experience" type="number" min="0" placeholder="0">
+      </section>
+
+      <button type="submit">Submit Application</button>
+      <button type="button" id="saveDraft">Save Draft</button>
+      <button type="button" id="clearDraft">Clear Draft</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
